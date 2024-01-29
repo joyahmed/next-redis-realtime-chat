@@ -26,7 +26,7 @@ const SidebarChatList = ({
 	const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
 
 	useEffect(() => {
-		console.log('event triggered');
+		// console.log('event triggered');
 
 		pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`));
 		pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
