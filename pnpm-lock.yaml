@@ -15,7 +15,7 @@ dependencies:
     specifier: ^0.5.7
     version: 0.5.7(tailwindcss@3.4.1)
   '@upstash/redis':
-    specifier: ^1.27.1
+    specifier: ^1.28.2
     version: 1.28.2
   axios:
     specifier: ^1.6.5
