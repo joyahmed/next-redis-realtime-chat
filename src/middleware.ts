@@ -15,20 +15,20 @@ export default withAuth(
 
     if (isSignInPage) {
       if (isAuthenticated) {
-        return NextResponse.redirect(new URL('/dashboard', req.url));
+        return NextResponse.rewrite(new URL('/dashboard', req.url));
       }
       return NextResponse.next();
     }
 
     if (!isAuthenticated && isAccessingProtectedRoutes) {
-      return NextResponse.redirect(new URL('/signin', req.url));
+      return NextResponse.rewrite(new URL('/signin', req.url));
     }
 
     if (pathname === '/' ) {
       if (isAuthenticated) {
-        return NextResponse.redirect(new URL('/dashboard', req.url));
+        return NextResponse.rewrite(new URL('/dashboard', req.url));
       } else {
-        return NextResponse.redirect(new URL('/signin', req.url));
+        return NextResponse.rewrite(new URL('/signin', req.url));
       }
     }
   },
