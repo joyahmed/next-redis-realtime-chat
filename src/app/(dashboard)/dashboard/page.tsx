@@ -6,14 +6,14 @@ import { ChevronRight } from 'lucide-react';
 import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 // export const runtime = 'edge'
 
-const page = async () => {
+const Dashboard = async () => {
 	const session = await getServerSession(authOptions);
 
-	if (!session) return notFound();
+	if (!session) return null;
 
 	const friends = await getFriendsByUserid(session.user.id);
 
@@ -99,4 +99,4 @@ const page = async () => {
 	);
 };
 
-export default page;
+export default Dashboard;

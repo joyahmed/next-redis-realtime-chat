@@ -14,7 +14,9 @@ export default withAuth(
 		const protectedRoutes = ['/dashboard'];
 		const isAccessingProtectedRoutes = protectedRoutes.some(route =>
 			pathname.startsWith(route)
-		);
+    );
+
+
 
 		if (isLoginPage) {
 			if (isAuthenticated) {
@@ -23,9 +25,13 @@ export default withAuth(
 			return NextResponse.next();
 		}
 
-		// if (!isAuthenticated && isAccessingProtectedRoutes) {
-		// 	return NextResponse.redirect(new URL('/signin', req.url));
-		// }
+    if (!isAuthenticated && isAccessingProtectedRoutes) {
+
+      console.log(`isAccessingProtectedRoutes => =>`, isAccessingProtectedRoutes);
+
+      console.log(`pathname => =>`, pathname);
+			return NextResponse.redirect(new URL('/signin', req.url));
+		}
 
 		if (pathname === '/') {
 			return NextResponse.redirect(new URL('/dashboard', req.url));

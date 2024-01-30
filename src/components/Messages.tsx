@@ -2,7 +2,6 @@
 
 import { pusherClient } from '@/lib/pusher';
 import { toPusherKey } from '@/lib/utils';
-import { format } from 'date-fns';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -42,8 +41,15 @@ const Messages = ({
 
 	const scrollDownRef = useRef<HTMLDivElement | null>(null);
 
+	// const formatTimestamp = (timestamp: number) => {
+	// 	return format(timestamp, 'HH:mm');
+	// };
+
 	const formatTimestamp = (timestamp: number) => {
-		return format(timestamp, 'HH:mm');
+		const date = new Date(timestamp);
+		const hours = date.getHours().toString().padStart(2, '0');
+		const minutes = date.getMinutes().toString().padStart(2, '0');
+		return `${hours}:${minutes}`;
 	};
 
 	return (
