@@ -20,16 +20,16 @@ export default withAuth(
       return NextResponse.next();
     }
 
-    // if (!isAuthenticated && isAccessingProtectedRoutes) {
-    //   return NextResponse.redirect(new URL('/signin', req.url));
-    // }
+    if (!isAuthenticated && isAccessingProtectedRoutes) {
+      return NextResponse.redirect(new URL('/signin', req.url));
+    }
 
     if (pathname === '/' ) {
-      // if (isAuthenticated) {
+      if (isAuthenticated) {
         return NextResponse.redirect(new URL('/dashboard', req.url));
-      // } else {
-      //   return NextResponse.redirect(new URL('/signin', req.url));
-      // }
+      } else {
+        return NextResponse.redirect(new URL('/signin', req.url));
+      }
     }
   },
   {
