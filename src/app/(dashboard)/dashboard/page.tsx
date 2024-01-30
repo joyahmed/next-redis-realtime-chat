@@ -13,37 +13,37 @@ import { notFound, redirect } from 'next/navigation';
 const Dashboard = async () => {
 	const session = await getServerSession(authOptions);
 
-	if (!session) return null;
+	// if (!session) return null;
 
-	const friends = await getFriendsByUserid(session.user.id);
+	// const friends = await getFriendsByUserid(session.user.id);
 
-	const friendsWithLastMessage = await Promise.all(
-		friends.map(async friend => {
-			const [lastMessageRaw] = (await fetchRedis(
-				'zrange',
-				`chat:${chatHrefConstructor(
-					session.user.id,
-					friend.id
-				)}:messages`,
-				-1,
-				-1
-			)) as string[];
+	// const friendsWithLastMessage = await Promise.all(
+	// 	friends.map(async friend => {
+	// 		const [lastMessageRaw] = (await fetchRedis(
+	// 			'zrange',
+	// 			`chat:${chatHrefConstructor(
+	// 				session.user.id,
+	// 				friend.id
+	// 			)}:messages`,
+	// 			-1,
+	// 			-1
+	// 		)) as string[];
 
-			const lastMessage =
-				lastMessageRaw && (JSON.parse(lastMessageRaw) as Message);
+	// 		const lastMessage =
+	// 			lastMessageRaw && (JSON.parse(lastMessageRaw) as Message);
 
-			return {
-				...friend,
-				lastMessage
-			};
-		})
-	);
+	// 		return {
+	// 			...friend,
+	// 			lastMessage
+	// 		};
+	// 	})
+	// );
 
 
 	return (
 		<div className='container py-12'>
 			<h1 className='font-bold text-5xl mb-8'>Recent Chats</h1>
-			{friendsWithLastMessage.length === 0 ? (
+			{/* {friendsWithLastMessage.length === 0 ? (
 				<p className='text-sm text-zinc-200'>
 					Nothing to show here...
 				</p>
@@ -94,7 +94,7 @@ const Dashboard = async () => {
 						</Link>
 					</div>
 				))
-			)}
+			)} */}
 		</div>
 	);
 };
