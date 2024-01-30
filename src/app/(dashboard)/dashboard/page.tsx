@@ -1,3 +1,5 @@
+'use server'
+
 import { getFriendsByUserid } from '@/helpers/get-friends-by-user-id';
 import { fetchRedis } from '@/helpers/redis';
 import { authOptions } from '@/lib/auth';
