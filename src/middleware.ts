@@ -3,7 +3,7 @@ import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
 
 export default withAuth(
-  async (req) => {
+  async function middleware(req) {
     const pathname = req.nextUrl.pathname;
 
     // Manage route protection
@@ -15,20 +15,20 @@ export default withAuth(
 
     if (isSignInPage) {
       if (isAuthenticated) {
-        return NextResponse.rewrite(new URL('/dashboard', req.url));
+        return NextResponse.redirect(new URL('/dashboard', req.url));
       }
       return NextResponse.next();
     }
 
     if (!isAuthenticated && isAccessingProtectedRoutes) {
-      return NextResponse.rewrite(new URL('/signin', req.url));
+      return NextResponse.redirect(new URL('/signin', req.url));
     }
 
     if (pathname === '/' ) {
       if (isAuthenticated) {
-        return NextResponse.rewrite(new URL('/dashboard', req.url));
+        return NextResponse.redirect(new URL('/dashboard', req.url));
       } else {
-        return NextResponse.rewrite(new URL('/signin', req.url));
+        return NextResponse.redirect(new URL('/signin', req.url));
       }
     }
   },
